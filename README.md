@@ -4,10 +4,10 @@ Portal API 是ArcGIS Rest API的重要组成部分，帮助开发者访问和管
 api的调用方式也比较容易，只需要发送http请求即可。  
 访问Portal的注意事项
 -----------------------------------
-1.对于公共的资源 无需token 即可正常访问
-2.对于访问私有资源，要首先调用api中的/sharing/generateToken获得token，发送请求的时候将token作为一个请求参数即可。
-3.对于访问资源的服务支持Get/Post两种访问方式，推荐使用Get来访问，对于修改或者创建资源的服务，只能使用Post方式来调用。具体API 支持那些访问方式请参阅api 文档http://resources.arcgis.com/en/help/arcgis-rest-api/#/Overview_of_portal_administration_in_the_ArcGIS_REST_API/02r300000246000000/
-4.注意有些服务必须要用https方式才能访问。具体查看上面的链接。
+1.  对于公共的资源 无需token 即可正常访问
+2.  对于访问私有资源，要首先调用api中的/sharing/generateToken获得token，发送请求的时候将token作为一个请求参数即可。
+3.  对于访问资源的服务支持Get/Post两种访问方式，推荐使用Get来访问，对于修改或者创建资源的服务，只能使用Post方式来调用。具体API 支持那些访问方式请参阅api 文档http://resources.arcgis.com/en/help/arcgis-rest-api/#/Overview_of_portal_administration_in_the_ArcGIS_REST_API/02r300000246000000/
+4.  注意有些服务必须要用https方式才能访问。具体查看上面的链接。
   
 #####下面介绍我开发过程中遇到的问题
  
