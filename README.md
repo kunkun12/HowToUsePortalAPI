@@ -1,8 +1,7 @@
-
 开发者如何使用Portal Rest API
 ===================================
-Portal API 是ArcGIS Rest API的重要组成部分，帮助开发者访问和管理Portal中的资源。开发者可以通过各种客户端来调用，在不同端上进行访问和管理Portal。Portal API 也是Portal的核心部分，有了Portal API 我们可以实现通过操作Portal实现的几乎所有功能本Demo，开发过程中我们应用往往会用到 主要演示如何使用java/Python/Javascript来使用Portal api 来访问Portal.为开发者开发调用Portal中的资源或者管理Portal提供开发示例。
-  
+Portal API 是ArcGIS Rest API的重要组成部分，帮助开发者访问和管理Portal中的资源。开发者可以通过各种客户端来调用，在不同端上进行访问和管理Portal。Portal API 也是Portal的核心部分，有了Portal API 我们可以实现通过操作Portal实现的几乎所有功能.本Demo主要演示如何使用java/Python/Javascript来使用Portal api 来访问Portal.为开发者开发调用Portal中的资源或者管理Portal提供开发示例。
+api的调用方式也比较容易，只需要发送http请求即可。  
 访问Portal的注意事项
 -----------------------------------
 1.对于公共的资源 无需token
