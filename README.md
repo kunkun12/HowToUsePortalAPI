@@ -1,5 +1,4 @@
-﻿
-  
+
 开发者如何使用Portal Rest API
 ===================================
 Portal API 是ArcGIS Rest API的重要组成部分，帮助开发者访问和管理Portal中的资源。开发者可以通过各种客户端来调用，在不同端上进行访问和管理Portal。Portal API 也是Portal的核心部分，有了Portal API 我们可以实现通过操作Portal实现的几乎所有功能本Demo，开发过程中我们应用往往会用到 主要演示如何使用java/Python/Javascript来使用Portal api 来访问Portal.为开发者开发调用Portal中的资源或者管理Portal提供开发示例。
@@ -20,7 +19,7 @@ Portal API 是ArcGIS Rest API的重要组成部分，帮助开发者访问和管
 3.demo中有个手动制作webmap的例子，用的是一个图片符号，先将图片处理成base64编码形式，然后给符号的imagedata赋值。制作完webmap之后保存为JSON文件。通过调用Portal api中的/sharing/content/users/esri001/addItem 添加到我的内容里面。难点是先熟悉WebMap的标准自己构造个JSON。
 
 ### Java
-由于服务器证书的问题。正常的发送https请求会失败，通过结合 X509TrustManager 来实现，我已经封装好了一个发送https请求的方法，如果要访问http的方法，按照正常的方式问题即可。
+由于服务器证书的问题。正常的发送https请求会失败，通过结合 X509TrustManager 来实现，我已经封装好了一个发送https请求的方法，如果要访问http的方法，按照正常的方式访问即可。
         
 ### Python  
 之前只是学习过这门语言，不是太熟悉，这里我是用httplib.HTTPSConnection 来发送https请求，没有遇到java中的证书问题。可以正常访问。可以结合 urllib.urlencode来构造查询参数，很方便。
