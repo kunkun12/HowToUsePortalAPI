@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>Create WebMap and AddTo Portal Content</title>
+    <script>dojoConfig={parseOnLoad:true}</script>
+    <link rel="stylesheet" href="http://dubaokun/arcgis_js_api/library/3.5/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://dubaokun/arcgis_js_api/library/3.5/js/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height:100%;
+        width:100%;
+        margin:0;
+        padding:0;
+      }
+      body {
+        background-color:#FFF;
+        overflow:hidden;
+        font-family:"Trebuchet MS";
+      }
+    </style>
+    <script src="http://dubaokun/arcgis_js_api/library/3.5/init.js"></script>
+    <script src="./CreateWebMap.js">
+      
+    </script>
+  </head>
+
+  <body class="claro" >
+  	
+    <div id="map" style="position: absolute">
+    <div id='creatWebMap' data-dojo-type='dijit/form/Button' style="position: absolute;z-index: 10000">保存为WebMap</div>
+    </div>
+  </body>
+</html>

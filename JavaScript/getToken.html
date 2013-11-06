@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <title>测试</title>
+  <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css">
+  <script type="text/javascript">dojoConfig={parseOnLoad:true,async: true};</script>
+  <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+ <script type="text/javascript" src='./app.js'></script>
+</head>
+
+<body class="claro">
+  <button id='proxy' data-dojo-type='dijit/form/Button'>proxy访问</button>
+  <button id='CORS' data-dojo-type='dijit/form/Button'>CORS访问</button>
+  <button id='getMyContent' data-dojo-type='dijit/form/Button'>获取我的内容</button>
+  <label for='uname'>用户名</label>
+  <input id='uname' value='esri001'>
+  <label for='pwd'>用户名</label>
+  <input type='password'  id='pwd' value='1'>
+  <div id='tokenresult'></div>
+  <div id='myContanerdiv' style='color:red'></div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <title>注册账户</title>
+  <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css">
+  <script type="text/javascript">dojoConfig={parseOnLoad:true};</script>
+  <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+
+  <script type='text/javascript'>
+  require([
+        "dojo/parser", 
+        "dojo/ready", 
+        "dojo/dom", 
+        "dojo/_base/array", 
+        "dijit/registry", 
+        "dojo/on", 
+        "esri/arcgis/Portal", 
+        "esri/config",
+        "esri/lang",
+        'esri/request','dojo/json'
+      ],function(parser,ready,dom,array,registry,on,Portal,config,lang,esrirequest,JSON){
+        ready(function(){
+        on(registry.byId('CreateUser'),'Click',function(){
+        console.log('开始创建用户');
+        config.defaults.io.corsEnabledServers.push('gisportal.arcgisonline.cn');
+          var register_username=dom.byId('uname').value;
+          var register_pwd=dom.byId('pwd').value;
+          var register_funame=dom.byId('fullname').value;
+          var register_email=dom.byId('email').value;
+          var  url='https://gisportal.arcgisonline.cn/sharing/community/signup';
+          var request= esrirequest({
+          url : url,
+          content : {
+          fullname : register_funame,
+          email : register_email,
+          username : register_username,
+          password : register_pwd,
+          securityQuestionIdx : 1,
+          securityAnswer : 'helloWorld',
+          f : "json"
+        }
+      }, {
+        usePost : true
+      }).then(function(res){
+        if(res.success)
+         dom.byId('singupresult').innerHTML='用户创建成功';
+      })
+
+        })  
+        
+         });
+  
+
+});
+  
+  </script>
+</head>
+
+<body class="claro">
+
+  <button id='CreateUser' data-dojo-type='dijit/form/Button'>点击注册</button>
+</br>
+</br>
+<table>
+<tr>
+  <td>用户名</td>
+  <td>
+    <input id='uname'/>
+  </td>
+</tr>
+<tr>
+  <td>全名</td>
+  <td>
+    <input id='fullname'/>
+  </td>
+</tr>
+<tr>
+  <td>密码</td>
+  <td>
+    <input id='pwd'/>
+  </td>
+</tr>
+<tr>
+  <td>邮箱</td>
+  <td>
+    <input id='email'/>
+  </td>
+</tr>
+</table>
+
+<div id='singupresult' style='color:red'></div>
+</body>
+</html>

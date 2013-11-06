@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>	
+	<title>UsejQuery</title>
+	<script type="text/javascript" src='./jquery-1.8.3.js'></script>
+	<script type="text/javascript">
+$(function(){
+	$.support.cors = true;
+	$("#proxy").click(function(){
+  $.ajax('https://gisportal.arcgisonline.cn/sharing/generateToken',{
+	dataType:'json',type:'POST',data:{username:'esri001',password:'1',f:'json',referer : "localhost"},success:function(res){         
+          var mytoken=res.token;
+		 $.ajax("https://gisportal.arcgisonline.cn/sharing/content/users/esri001",{data:{token:mytoken,f:'json'},type:'POST',success:function(res){
+		 var s="";
+		 var ressult=$.parseJSON(res)
+		 	var items=ressult.items;
+		 	$.each(items,function(i,content){
+		 		 var title=content.title;
+      var type=content.type;
+      var owner=content.owner;
+     s+="名称："+title +"  类型:"+type +"   作者："+owner+"   创建时间:  "+new Date(content.uploaded).toLocaleDateString()+"</br></br>";
+		 	});
+	     	console.log(items);
+		 	 $('#myContanerdiv').html(s);
+        	//console.log(res);
+        }
+        });
+	},error:function(err){console.log(err)}
+});
+
+		});
+	});
+   </script>
+</head>
+
+<body class="claro">
+	<button id='proxy' >jQuery访问</button>
+	
+	<label for='uname'>用户名</label>
+	<input id='uname' value='esri001'>
+	<label for='pwd'>用户名</label>
+	<input type='password'  id='pwd' value='1'>
+	<div id='tokenresult'></div>
+
+	<div id='myContanerdiv' style='color:red'></div>
+</body>
+</html>

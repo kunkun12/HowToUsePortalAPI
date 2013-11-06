@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>内容获取</title>
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css">
+  <script type="text/javascript">
+  dojoConfig={parseOnLoad:true};
+  </script>
+   
+    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+
+    <script>
+  
+      var token;
+      function init() { 
+        dojo.connect(dijit.byId('proxy'),'onClick',userpoxygettoken); 
+        dojo.connect(dijit.byId('CORS'),'onClick',usecorsgettoken);
+        dojo.connect(dijit.byId('getMyContent'),'onClick',getMyContent);           
+     }
+
+esri.config.defaults.io.proxyUrl='proxy.jsp';
+//使用代理访问
+ function userpoxygettoken()
+ {
+          var username=dojo.byId('uname').value;
+          var pwd=dojo.byId('pwd').value;
+           dojo.xhrPost({url:"proxy.jsp?https://gisportal.arcgisonline.cn/sharing/generateToken",postData : {
+                username : username,
+                password : pwd,
+                referer : "localhost",
+                f : "json"
+            }}).then(function(res){
+              var result=  dojo.fromJson(res);
+                token=result.token;
+                dojo.byId('tokenresult').innerHTML="使用代理方式："+result.token;            
+            },function(res){
+                console.log('获取失败');
+            });     
+ }
+
+ //使用跨域资源共享CORS
+  function usecorsgettoken()
+    {
+          esri.config.defaults.io.corsEnabledServers.push('gisportal.arcgisonline.cn');
+          var username=dojo.byId('uname').value;
+          var pwd=dojo.byId('pwd').value;
+          var  url='https://gisportal.arcgisonline.cn/sharing/generateToken';
+          var loginrequest = esri.request({
+           url : url,
+          content : {
+          username : username,
+          password : pwd,
+          referer : "localhost",
+          f : "json"
+        },
+      }, {
+        usePost : true
+      }).then(function(res){ 
+      token=res.token;
+      dojo.byId('tokenresult').innerHTML="使用CORS方式："+res.token; 
+      },function(err){});}
+
+    function getMyContent(){
+      var uname=dojo.byId('uname').value;
+        //https://gisportal.arcgisonline.cn/sharing/content/users/esri001
+       var MyContentUrl = "https://gisportal.arcgisonline.cn/sharing/content/users/"+uname;
+          esri.request({
+          url : MyContentUrl,
+          content : {
+            token : token,f:'json' }
+  },
+   {
+    usePost : true
+  }).then(function(res){
+    var s='</br></br>';
+    dojo.forEach(res.items,function(content,index){
+      var title=content.title;
+      var type=content.type;
+      var owner=content.owner;
+     s+="名称："+title +"  类型:"+type +"   作者："+owner+"   创建时间:  "+new Date(content.uploaded).toLocaleDateString()+"</br></br>";
+
+    });
+
+dojo.byId('myContanerdiv').innerHTML=s;
+   
+   },function(err){
+    console.log(err);
+  });
+
+    }      
+         dojo.ready(init);
+
+    </script>
+  </head>
+
+  <body class="claro">
+    <button id='proxy' data-dojo-type='dijit/form/Button'>proxy访问</button>
+    <button id='CORS' data-dojo-type='dijit/form/Button'>CORS访问</button>
+    <button id='getMyContent' data-dojo-type='dijit/form/Button'>获取我的内容</button>
+    <label for='uname'>用户名</label><input id='uname' value='esri001'> 
+    <label for='pwd'>用户名</label><input type='password'  id='pwd' value='1'> 
+   <div id='tokenresult'> </div>
+
+   <div id='myContanerdiv' style='color:red'>
+   
+   </div>
+  </body>
+</html> 
+         
